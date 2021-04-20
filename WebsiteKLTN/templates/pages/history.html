@@ -1,0 +1,171 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Lịch sử vận chuyển{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<title>Lịch sử</title>
+		<script>
+		function overlay() {
+			el = document.getElementById("overlay");
+			el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		}
+		</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+			<style>
+			#overlay {
+				visibility: hidden;
+				position: fixed;
+				margin-top: -80px;
+				left: 0px;
+				top: 0px;
+				width:100%;
+				height:100%;
+				text-align:center;
+				z-index: 1000;
+			}
+			#overlay div {
+				width:500px;
+				margin: 100px auto;
+				background-color: #fff;
+				border:1px solid #000;
+				padding:15px;
+				text-align:center;
+			}
+			body {
+				height:100%;
+				margin:0;
+				padding:0;
+			}
+			</style>
+	</head>
+<body>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<p></p>
+<div class="container">
+    {% if messages %}
+
+		<ul class="messages">
+
+		{% for mess in messages %}
+		<div class="alert alert-danger"> {{mess}} </div>
+		{% endfor %}
+
+		<div class="row justify-content-center">
+			<a href='#' onclick='overlay()'>Xem chi tiết đơn hàng mới</a>
+		</div>
+
+	{% endif %}
+</div>
+
+
+	<div id="overlay">
+		{% comment %} {% for resultdh in donhang %}
+			{% if resultdh.IDKhachHang == doanhnghiepduocchon %} {% endcomment %}
+				<div>
+					<p>Mã đơn hàng: {{donhangadd.MaDonHang}}</p>
+					<hr>
+					<p>ID khác hàng: {{donhangadd.IDKhachHang}}</p>
+					<hr>
+					<p>Loại hàng hóa: {{donhangadd.LoaiHangHoa}}</p>
+					<hr>
+					<p>Trọng tải: {{donhangadd.TrongTai}}</p>
+					<hr>
+					<p>Địa điểm nhận hàng: {{donhangadd.DiaDiemNhanHang}}</p>
+					<hr>
+					<p>Thời điểm nhận hàng: [{{donhangadd.NgayNhanHang}}] [{{donhangadd.GioNhanHang}}]</p>
+					<hr>
+					<p>Địa điểm giao hàng: {{donhangadd.DiaDiemGiaoHang}}</p>
+					<hr>
+					<p>Thời điểm giao hàng: [{{donhangadd.NgayGiaoHang}}] [{{donhangadd.NgayGiaoHang}}]</p>
+					<hr>
+					<p>Chú ý: {{donhangadd.ChuY}}</p>
+					<hr>
+					<p>Trạng thái: {{donhangadd.TrangThai}}</p>
+					<hr>
+					[<a href='#' onclick='overlay()'>{{doanhnghiep}}</a>]
+				</div>
+			{% comment %} {% else %}
+				<div>
+					<p>Đơn hàng: {{resultdh.IDKhachHang}}</p>
+					<p>Đơn hàng: {{tendoanhnghiep}}</p>
+					[<a href='#' onclick='overlay()'>{{tendoanhnghiep}}</a>]
+				</div> {% endcomment %}
+			{% comment %} {% endif %}
+		{% endfor %} {% endcomment %}
+	</div>
+
+
+<!----------------------------------------------------------------------------------------------->
+<hr>
+<p class="font-weight-bold text-uppercase text-center text-uppercase">Lịch sử giao hàng</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      {% comment %} <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th> {% endcomment %}
+		<th scope="col">Mã Đơn Hàng</th>
+		{% comment %} <th scope="col">ID Khác Hàng</th> {% endcomment %}
+		<th scope="col">Loại Hàng Hóa</th>
+		{% comment %} <th scope="col">Trọng Tải</th> {% endcomment %}
+		<th scope="col">Nhận Hàng</th>
+		{% comment %} <th scope="col">Thời Gian Nhận Hàng</th> {% endcomment %}
+		<th scope="col">Giao Hàng</th>
+		{% comment %} <th scope="col">Thời Gian Giao Hàng</th> {% endcomment %}
+		{% comment %} <th scope="col">Chú ý</th> {% endcomment %}
+		<th scope="col">Trạng thái</th>
+    </tr>
+  </thead>
+    <tbody>
+		{% for resultdh in donhang %}
+
+			{% if resultdh.IDKhachHang.TenDoanhNghiep == doanhnghiep.TenDoanhNghiep %}
+			
+			<tr>
+				<td>{{resultdh.MaDonHang}}</td>
+				{% comment %} <td>{{resultdh.IDKhachHang}}</td> {% endcomment %}
+				<td>{{resultdh.LoaiHangHoa}} ({{resultdh.TrongTai}} kg)</td>
+				{% comment %} <td>{{resultdh.TrongTai}}</td> {% endcomment %}
+				<td>[{{resultdh.DiaDiemNhanHang}}] [{{resultdh.NgayNhanHang}}] [{{resultdh.GioNhanHang}}]</td>
+				{% comment %} <td>{{resultdh.ThoiDiemNhanHang}}</td> {% endcomment %}
+				<td>[{{resultdh.DiaDiemGiaoHang}}] [{{resultdh.NgayGiaoHang}}] [{{resultdh.GioGiaoHang}}]</td>
+				{% comment %} <td>{{donhangadd.ThoiDiemGiaoHang}}</td> {% endcomment %}
+				{% comment %} <td>{{donhangadd.ChuY}}</td> {% endcomment %}
+				<td>{{resultdh.TrangThai}}
+				<form action='/viewHistory/' method='POST'>
+					{% csrf_token %}
+					<button class="btn btn-primary">Chi tiết</button>
+					<input type="hidden" value={{resultdh.MaDonHang}} name="DH">
+					{% comment %} <input type="hidden" value={{tkduocchon}} name="back"> {% endcomment %}
+				</form>
+				</td>
+				{% comment %} <td><a href='#' onclick='overlay()'>Chi tiết</a></td> {% endcomment %}
+			</tr>
+			{% endif %}
+		{% endfor %}
+  </tbody>
+</table>
+
+<hr>
+<form action='/profile/' method='POST'>
+	{% csrf_token %}
+	<button class="btn btn-primary btn-lg btn-block">END</button>
+	{% comment %} <input type="hidden" value={{tkduocchon}} name="back"> {% endcomment %}
+</form>
+<br>
+
+</body>
+</html>
+
+
+{% endblock %}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Xác định tuyến đường</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style type="text/css">
+      #right-panel {
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select,
+      #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        height: 100%;
+        float: left;
+        width: 63%;
+        height: 100%;
+      }
+
+      #right-panel {
+        float: right;
+        width: 34%;
+        height: 100%;
+      }
+
+      .panel {
+        height: 100%;
+        overflow: auto;
+      }
+
+      button {
+        margin-top:15px;
+        margin-right: 15px;
+        height: 35px;
+      }
+
+      p {
+        margin-top:15px;
+      }
+    </style>
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 6,
+          center: { lat: 16.3, lng: 106 },
+        });
+        var from = new google.maps.LatLng(21, 105);
+        var to = new google.maps.LatLng(21.5, 105.5);
+        const geocoderA = new google.maps.Geocoder();
+        const geocoderB = new google.maps.Geocoder();
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer({
+          draggable: true,
+          map,
+          panel: document.getElementById("right-panel"),
+        });
+        directionsRenderer.addListener("directions_changed", () => {
+          computeTotalDistance(directionsRenderer.getDirections());
+        });
+
+        ////////////////////////////////////////////////
+        
+        
+        //////////////////////////////////////////////////
+        // getLocation(geocoder, to, map);
+        displayRoute(
+          geocoderA,
+          geocoderB,
+          from,
+          to,
+          directionsService,
+          directionsRenderer,
+        );
+      }
+
+      function displayRoute(geocoderA, geocoderB, origin, destination, service, display) {
+
+        const locationA = '{{diadiemnhanhang}}';
+        geocoderA.geocode({ address: locationA }, (results, status) => {
+          if (status === "OK") {
+            // map.setCenter(results[0].geometry.location);
+            var constLatLoA = results[0].geometry.location;
+
+            const locationB = '{{diadiemgiaohang}}';
+            geocoderB.geocode({ address: locationB }, (resultsB, statusB) => {
+              if (statusB === "OK") {
+                // map.setCenter(results[0].geometry.location);
+                var constLatLoB = resultsB[0].geometry.location;
+
+                service.route(
+                  {
+                    origin: constLatLoA,
+                    destination: constLatLoB,
+                    waypoints: [
+                    ],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    avoidTolls: true,
+                  },
+                  (result, statuss) => {
+                    if (statuss === "OK" && result) {
+                      display.setDirections(result);
+                    } else {
+                      alert("Could not display directions due to: " + status);
+                    }
+                  }
+                );
+
+              }
+            });
+          }
+        });
+        
+        
+      }
+
+      function computeTotalDistance(result) {
+        let total = 0;
+        const myroute = result.routes[0];
+
+        if (!myroute) {
+          return;
+        }
+
+        for (let i = 0; i < myroute.legs.length; i++) {
+          total += myroute.legs[i].distance.value;
+        }
+        total = total / 1000;
+        document.getElementById("total").innerHTML = total + " km";
+      }
+
+      function geocodeAddressFirst(getLocation, geocoder, resultsMap) {
+        const address = "42 thanh binh, mo lao, ha noi";
+        geocoder.geocode({ address: address }, (results, status) => {
+          if (status === "OK") {
+            resultsMap.setCenter(results[0].geometry.location);
+            const newLocation = new google.maps.LatLng(results[0].geometry.location.latitude, results[0].geometry.location.longitude);
+            getLocation = new google.maps.LatLng(results[0].geometry.location.latitude, results[0].geometry.location.longitude);
+            new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location,
+              title: results[0].formatted_address,
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+            });
+          } else {
+            alert(
+              "Geocode was not successful for the following reason: " + status
+            );
+          }
+        });
+      }
+
+      function getLocation(geocoder, varTo, resultsMap) {
+        const molao = "42 thanh binh, mo lao, ha noi";
+        geocoder.geocode({ address: molao }, (results, status) => {
+          if (status === "OK") {
+            resultsMap.setCenter(results[0].geometry.location);
+            const constLatLo = results[0].geometry.location;
+            varTo = constLatLo;
+            new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location,
+              title: String(results[0].geometry.location),
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+            });
+          } else {
+            alert(
+              "Geocode was not successful for the following reason: " + status
+            );
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div class="form-row" id="right-panel">
+      <p class="col-sm-8">TỔNG QUÃNG ĐƯỜNG: <span id="total"></span></p>
+                      <div class="col-sm-3">
+                        <form class="form-inline" action='/history/' method='POST'>
+                        {% csrf_token %}
+                          <div class="form-row">
+                            <button type="submit" class="btn btn-info" name="history_new" value={{tkkhachhang}}>Xác nhận</button>
+                            <input type="hidden" name="addDonHang" value={{addDonHang}}/>
+                          </div>
+                        </form>
+                      </div>
+    </div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZj7EKygcpx62kB2j_qmvFONy0x0Mk29E&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+  </body>
+</html>

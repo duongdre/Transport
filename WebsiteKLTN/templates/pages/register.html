@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+<title>Đăng ký</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Hotjar Tracking Code for My site -->
+
+<script>
+		function overlay() {
+			el = document.getElementById("overlay");
+			el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		}
+		</script>
+<style>
+
+/* BASIC */
+
+html {
+  background-color: #56baed;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  {% comment %} background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath opacity=".5" d="M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z"/%3E%3Cpath d="M6 5V0H5v5H0v1h5v94h1V6h94V5H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); {% endcomment %}
+}
+
+#overlay {
+	opacity: 0.95;
+	visibility: visible;
+	position: fixed;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	text-align: center;
+	z-index: 1000;
+	cursor: pointer;
+}
+#overlay div {
+	width: 700px;
+	margin: 0px auto;
+	background-color: #ffeeee;
+	border: 1px solid rgba(0,0,0,0.5);
+	padding: 0px;
+	text-align: center;
+	transform: translate(0%,30%);
+	-ms-transform: translate(-50%,-50%);
+}
+
+</style>
+</head>
+<body>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="jumbotron text-center">
+	<h4 class="display-4">Cảm ơn khách hàng đã sử dụng dịch vụ!</h4>
+	<p class="lead"><strong>Vui lòng kiểm tra email</strong> để hoàn tất đăng ký.</p>
+	<hr>
+	<p>
+		Tư vấn miễn phí?
+		<p>   </p>
+		<a type="button" href="tel:+84941905633">Điện thoại</a> 
+		<p>   </p>
+		<a type="button" href="mailto:duongdre@gmail.com?subject=Subject">Email</a>
+	</p>
+	<p class="lead">
+		<a class="btn btn-primary btn-sm" href="/" role="button">Trở về trang chủ</a>
+	</p>
+</div>
+
+{% comment %} <div id="overlay">
+	<div class="jumbotron text-center">
+	<h1 class="display-3">Thank You!</h1>
+	<p class="lead"><strong>Please check your email</strong> for further instructions on how to complete your account setup.</p>
+	<hr>
+	<p>
+		Having trouble? <a href="">Contact us</a>
+	</p>
+	<p class="lead">
+		<a class="btn btn-info" href="https://bootstrapcreative.com/" role="button">Trang chủ</a>
+	</p>
+	</div>
+</div> {% endcomment %}
+
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+    {% comment %} href="{% static 'nicepage.css' %}" {% endcomment %}
+
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+  </head>
+  <body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-1">
+        <aside class="sidebar">
+          <div class="toggle">
+            <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+                  <span></span>
+                </a>
+          </div>
+          <div class="side-inner">
+
+            <div class="profile">
+              <img src="https://img.icons8.com/color/70/000000/traffic-jam.png" alt="Image" class="img-fluid">
+              <h3 class="name">{{doanhnghiep}}</h3>
+              <span class="country">{{doanhnghiep.DiaChiTruSoChinh}}</span>
+            </div>
+
+            <div class="counter d-flex justify-content-center">
+              <!-- <div class="row justify-content-center"> -->
+                <div class="col">
+                  <strong class="number">892</strong>
+                  <span class="number-label">Posts</span>
+                </div>
+                <div class="col">
+                  <strong class="number">22.5k</strong>
+                  <span class="number-label">Followers</span>
+                </div>
+                <div class="col">
+                  <strong class="number">150</strong>
+                  <span class="number-label">Following</span>
+                </div>
+              <!-- </div> -->
+            </div>
+            
+            <div class="nav-menu">
+              <ul>
+                <li><a href="/profile/"><span class="icon-home mr-3"></span>Tài khoản</a></li>
+                <li><a href="/map/"><span class="icon-map mr-3"></span>Bản đồ</a></li>
+                <li><a href="/transport/"><span class="icon-location-arrow mr-3"></span>Vận chuyển</a></li>
+                <li><a href="/history/"><span class="icon-history mr-3"></span>Lịch sử vận chuyển</a></li>
+                <li><a href="/login/"><span class="icon-sign-out mr-3"></span>Đăng xuất</a></li>
+              </ul>
+            </div>
+          </div>
+          
+        </aside>
+      </div>
+
+
+      <div class="col-sm-12">
+        <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+    
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

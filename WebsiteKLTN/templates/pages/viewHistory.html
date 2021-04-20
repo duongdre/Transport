@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lịch sử chuyến đi</title>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Button for Định vị. */
+      button {
+        margin-top:15px;
+        margin-bottom: 50px;
+        margin-left: 15px;
+        line-height: 30px;
+        font-weight: bold;
+        padding: 0 40px;
+        background: salmon;
+        border: none;
+        color: #3d3d3d;
+      }
+
+      button.center {
+        width: 40%;
+        margin-left: 30%;
+        margin-right: 30%
+      }
+
+      button:hover {
+        background: lightsalmon;
+      }
+
+      /* css for Tìm kiếm. */
+      #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+
+      #infowindow-content {
+        display: none;
+      }
+
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 22px;
+        font-weight: 300;
+        margin-left: 12px;
+        margin-top: 15px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 800px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+
+      #target {
+        width: 345px;
+      }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        "apiKey": "AIzaSyCz1w7z4RklhcvWlXMq0DOI63C7uT6FdkQ",
+        "authDomain": "sharp-technique-304506.firebaseapp.com",
+        "databaseURL": "https://sharp-technique-304506-default-rtdb.firebaseio.com/",
+        "projectId": "sharp-technique-304506",
+        "storageBucket": "sharp-technique-304506.appspot.com",
+        "messagingSenderId": "618699052643",
+        "appId": "1:618699052643:web:d7b54177c1ba464bad0a56"
+      };
+      firebase.initializeApp(config);
+
+      var speed = 1000;
+      var markerDH = undefined;
+      var position = [21.0038905, 105.8170848];
+      function initAutocomplete() {
+        var latlng = new google.maps.LatLng(position[0], position[1]);
+        var myOptions = {
+        zoom: 8,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.TOP_RIGHT,
+        },
+        };
+        map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        const geocoder = new google.maps.Geocoder();
+        const address = '{{diadiemnhanhang}}';
+        geocoder.geocode({ address: address }, (results, status) => {
+          if (status === "OK") {
+            start = results[0].geometry.location;
+            map.setCenter(results[0].geometry.location);
+            //new google.maps.Marker({
+            //  map: map,
+            //  position: results[0].geometry.location,
+            //});
+            const geocoder2 = new google.maps.Geocoder();
+            const address2 = '{{diadiemgiaohang}}';
+            geocoder2.geocode({ address: address2 }, (results, status) => {
+              if (status === "OK") {
+                end = results[0].geometry.location;
+                map.setCenter(results[0].geometry.location);
+                //new google.maps.Marker({
+                //  map: map,
+                //  position: results[0].geometry.location,
+                //);
+                var display = new google.maps.DirectionsRenderer();
+                var services = new google.maps.DirectionsService();
+                display.setMap(map);
+                    var request ={
+                        origin : start,
+                        destination: end,
+                        travelMode: 'DRIVING'
+                    };
+                    services.route(request,function(result,status){
+                        if(status =='OK'){
+                            display.setDirections(result);
+                        }
+                    });
+              } else {
+                alert("Không thể lấy vị trí đơn hàng: " + status);
+              }
+            });
+          } else {
+            alert("Không thể lấy vị trí đơn hàng: " + status);
+          }
+        });
+        
+
+        //////////////////////////////////////////////////
+        const DHString =
+          '<div id="content">' +
+          '<div id="siteNotice">' +
+          "</div>" +
+          '<div id="bodyContent">' +
+          "<p>Hàng hóa: <b>{{hanghoa}}</b> "+
+          "<p>Nhận hàng: <b>{{nhanhang}}</b> "+
+          "<p>Vào lúc: <b>{{nhanhangtime}}</b> "+
+          "<p>Giao hàng: <b>{{giaohang}}</b> "+
+          "<p>Vào lúc: <b>{{giaohangtime}}</b> "+
+          "<p>Trạng thái: <b>{{trangthai}}</b> "+
+          "</div>" +
+          "</div>";
+        const infowindowDH = new google.maps.InfoWindow({
+          content: DHString,
+        });
+
+        var icon = {
+            url: 'https://png.pngtree.com/svg/20170105/1d3146059c.png', // url
+            scaledSize: new google.maps.Size(24,24), // scaled size
+            origin: new google.maps.Point(0,0), // origins
+            anchor: new google.maps.Point(12,12), // anchor
+        };
+        
+
+        google.maps.event.addListener(map, 'click', function(me) {
+          markerDH.addListener("click", () => {
+            infowindowDH.open(map, markerDH);
+          });
+          
+          var result = [me.latLng.lat(), me.latLng.lng()];
+          transition(result);
+        });
+
+        var markers = [];
+        var icon = {
+          url: 'https://png.pngtree.com/svg/20170105/1d3146059c.png', // url
+          scaledSize: new google.maps.Size(24,24), // scaled size
+          origin: new google.maps.Point(0,0), // origins
+          anchor: new google.maps.Point(12,12), // anchor
+        };
+      
+        var database = firebase.database();
+        var refer = firebase.database().ref("Data/ThongTinVanChuyen");
+        refer.on('value', function(snapshot) {
+          var string = "";
+          snapshot.forEach(function(childSnapshot) {
+            if (childSnapshot.child("DH").val() == '{{DHHistory}}'){
+              string = childSnapshot.child("DH").val() + "\n" + childSnapshot.child("X").val() + "\n" + childSnapshot.child("Y").val();
+              var firstpos = parseFloat(childSnapshot.child("X").val());
+              var secondpos = parseFloat(childSnapshot.child("Y").val());
+
+              //Vẽ trước điểm tới mỗi lần nhảy
+              var newPosition = [firstpos, secondpos];
+              var newlatlng = new google.maps.LatLng(newPosition[0], newPosition[1]);
+
+              markers.push(
+                new google.maps.Marker({
+                  map,
+                  icon: icon,
+                  title: string,
+                  position: newlatlng,
+                    // position: pos,
+                    // map: map,
+                    // icon: svgMarker,
+                    // title:"Bạn đang ở đây",
+                  draggable: true,
+                  visible: false,
+                })
+            );
+            }
+          });
+        });
+
+        const selectButton = document.createElement("button");
+        selectButton.textContent = "Theo dõi lịch trình";
+        selectButton.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.BOTTOM].push(selectButton);
+        selectButton.addEventListener("click", () => {
+          var position = [21.0038905, 105.8170848];
+          markerDH = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: "Vị trí hàng hóa",
+            icon: icon,
+            draggable: true,
+          });
+
+          markerDH.addListener("click", () => {
+            infowindowDH.open(map, markerDH);
+          });
+
+          for (let i=0; i<markers.length-1; i++){
+            //markers[i].setVisible(true); // maps API hide call
+            setTimeout(() => {
+              {% comment %} deltaLat = (markers[i+1].position[0] - markers[i].position[0])/numDeltas;
+              deltaLng = (markers[i+1].position[1] - markers[i].position[1])/numDeltas;
+              
+              if (markers[i].position[0] + deltaLat > markers[i+1].position[0]){
+                var position = [markers[i].position[0] + deltaLat, markers[i].position[2] + deltaLng];
+                markerB = new google.maps.Marker({
+                  position: position,
+                  map: map,
+                  title: "Vị trí hàng hóa2",
+                  icon: icon,
+                  draggable: true,
+                });
+                moveMarkerFull(markers[i], markerB);
+              }else{
+                moveMarkerFull(markers[i], markers[i+1]);
+              } {% endcomment %}
+              moveMarkerFull(markers[i], markers[i+1]);
+            }, speed * i);
+          }
+        });
+
+        const speed1 = document.createElement("button");
+        speed1.textContent = "X2";
+        speed1.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.BOTTOM].push(speed1);
+        speed1.addEventListener("click", () => {
+          speed = 500;
+        });
+
+        const speed2 = document.createElement("button");
+        speed2.textContent = "X4";
+        speed2.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.BOTTOM].push(speed2);
+        speed2.addEventListener("click", () => {
+          speed = 250;
+        });
+
+        const speed3 = document.createElement("button");
+        speed3.textContent = "X8";
+        speed3.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.BOTTOM].push(speed3);
+        speed3.addEventListener("click", () => {
+          speed = 125;
+        });
+
+
+        const contentString =
+          '<div id="content">' +
+          '<div id="siteNotice">' +
+          "</div>" +
+          '<h1 id="firstHeading" class="firstHeading">Vị trí hiện tại</h1>' +
+          '<div id="bodyContent">' +
+          "<p><b>Vị trí hiện tại của bạn</b>. (Được tìm thấy bởi Duongenzahl de Cielish)"+
+          ".</p>" +
+          "</div>" +
+          "</div>";
+
+        // infoWindow = new google.maps.InfoWindow();
+        const infowindow = new google.maps.InfoWindow({
+          content: contentString,
+        });
+
+      }
+
+      function myFunction() {
+        window.location.href = "/";
+      }
+
+      var numDeltas = 100;
+      var delay = 100; //milliseconds
+      var i = 0;
+      var deltaLat;
+      var deltaLng;
+      function transition(result){
+          i = 0;
+          deltaLat = (result[0] - position[0])/numDeltas;
+          deltaLng = (result[1] - position[1])/numDeltas;
+          moveMarker();
+      }
+
+      function moveMarker(){
+        position[0] += deltaLat;
+        position[1] += deltaLng;
+        var latlng = new google.maps.LatLng(position[0], position[1]);
+        markerDH.setPosition(latlng);
+        if(i!=numDeltas){
+          i++;
+          setTimeout(moveMarker, delay);
+        }
+      }
+
+      function moveMarkerFull(mar1, mar2){
+        mar1.setVisible(false);
+        mar2.setVisible(true);
+        mar1.setPosition(mar2.position);
+      }
+
+      // Vẽ đường style 1
+      {% comment %} function displayRoute(geocoderA, geocoderB, origin, destination, service, display) {
+        const locationA = '{{diadiemnhanhang}}';
+        geocoderA.geocode({ address: locationA }, (results, status) => {
+          if (status === "OK") {
+            // map.setCenter(results[0].geometry.location);
+            var constLatLoA = results[0].geometry.location;
+
+            const locationB = '{{diadiemgiaohang}}';
+            geocoderB.geocode({ address: locationB }, (resultsB, statusB) => {
+              if (statusB === "OK") {
+                // map.setCenter(results[0].geometry.location);
+                var constLatLoB = resultsB[0].geometry.location;
+
+                service.route(
+                  {
+                    origin: constLatLoA,
+                    destination: constLatLoB,
+                    waypoints: [
+                    ],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    avoidTolls: true,
+                  },
+                  (result, statuss) => {
+                    if (statuss === "OK" && result) {
+                      display.setDirections(result);
+                    } else {
+                      alert("Could not display directions due to: " + status);
+                    }
+                  }
+                );
+              }
+            });
+          }
+        });
+      } {% endcomment %}
+      // Kết thúc vẽ đường style 1
+
+      //Tìm địa chỉ với String (Đã đưa hàm vào Init)
+      function geocodeAddress(geocoder, resultsMap) {
+        const address = "Việt Trì Phú Thọ";
+        geocoder.geocode({ address: address }, (results, status) => {
+          if (status === "OK") {
+            resultsMap.setCenter(results[0].geometry.location);
+            new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location,
+            });
+          } else {
+            alert("Geocode was not successful for the following reason: " + status);
+          }
+        });
+      }
+      //Kết thúc tìm địa chỉ với String
+      
+    </script>
+  </head>
+  <body>
+    {% comment %} <div>
+      <input
+        id="pac-input"
+        class="controls"
+        type="text"
+        placeholder="Tìm kiếm trên bản đồ"
+      />
+    </div> {% endcomment %}
+    
+    <div id="map"></div>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZj7EKygcpx62kB2j_qmvFONy0x0Mk29E&callback=initAutocomplete&libraries=places&v=weekly"
+      async
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Red Oval trucks are the best, Peterbilt’s Technology, Model 567, Model 389, On Hightway, Alternative Fuels, Our Technologies, Built to Work Hard, Our Gallery, History Of Red Oval, About Us">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="{% static 'nicepage.css' %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static 'Trang-chủ.css' %}" type="text/css" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'jquery.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'nicepage.js'%}" defer=""></script>
+    
+    <meta name="generator" content="Nicepage 3.5.3, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+    <style>
+    @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+    @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);    /*reset css*/
+    /****** Style Star Rating Widget *****/
+    #rating{margin-left:242px;border:none;float:left;}
+    #rating>{margin-left:10px;border:none;float:left;}
+    #rating>input{display:none;}/*ẩn input radio - vì chúng ta đã có label là GUI*/
+    #rating>label:before{margin:5px;font-size:3.25em;font-family:FontAwesome;display:inline-block;content:"\f005";}/*1 ngôi sao*/
+    #rating>.half:before{content:"\f089";position:absolute;}/*0.5 ngôi sao*/
+    #rating>label{color:#ddd;float:right;}/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+    /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+    #rating>input:checked~label,
+    #rating:not(:checked)>label:hover, 
+    #rating:not(:checked)>label:hover~label{color:#FFD700;}
+    /* Hover vào các sao phía trước ngôi sao đã chọn*/
+    #rating>input:checked+label:hover,
+    #rating>input:checked~label:hover,
+    #rating>label:hover~input:checked~label,
+    #rating>input:checked~label:hover~label{color:#FFED85;}
+
+    #parent{
+      width:100%; 
+      height: 140px; 
+      margin-top: 35%;
+      position:relative;
+      white-space: nowrap;
+      overflow: hidden;
+      position:fixed;
+      z-index: 1000;
+    }
+
+    #rightchild{
+      width:100px;
+      top: 0;
+      right:0; 
+      bottom: 0;
+      position:absolute;
+    }
+
+    .btn.btn-success {
+      border:1px solid #F9BC35; 
+      width: 35px;
+      top: 0;
+      right:0; 
+      bottom: 0;
+      position: absolute;
+      z-index: 999999;
+      background-image: url("{% static "images/feedback.png" %}");
+    }
+
+    b.ex1 {
+      margin-left: 25px;
+    }
+
+    body {
+      height:100%;
+      margin:0;
+      padding:0;
+      background-image: url("{% static "images/background.png" %}");
+    }
+    
+    .modal-body {
+      display: flex;
+      padding: 0;
+      border-radius: 4rem;
+      font-family: 'PT Sans', sans-serif;
+      margin-left: 155px;
+      {% comment %} opacity:0.9; {% endcomment %}
+    }
+
+    .modal-content {
+      border-radius: 4rem;
+      width: 140%;
+      -webkit-box-shadow: -1px -2px 42px -19px rgba(0,0,0,0.74);
+      -moz-box-shadow: -1px -2px 42px -19px rgba(0,0,0,0.74);
+      box-shadow: -1px -2px 42px -19px rgba(0,0,0,0.74);
+    }
+    .modal-content h1, .modal-content h2, .modal-content h3, .modal-content h4 {
+      text-align: center;
+    }
+    .modal-content h1 {
+      font-size: 1.3em;
+      text-transform: uppercase;
+      margin-left: -200px;
+      margin-right: -50px;
+    }
+
+    .modal-content h2 {
+      font-size: 1.1em;
+      color: #fff;
+    }
+
+    .modal-content h3 {
+      font-size: .8em;
+      letter-spacing: 2px;
+      margin-left: -200px;
+      margin-right: -50px;
+    }
+    
+    .modal-content h4 {
+      font-size: 1.7em;
+      color: #fff;
+    }
+    
+    form {
+      font-size: .8em;
+      margin-left: -200px;
+      margin-right: -50px;
+    }
+    
+    .column {
+      flex: 50%;
+      padding: 10px;
+      margin-bottom: -16px;
+      margin-top: -16px;
+    }
+
+    .column#main {
+      flex: 75%;
+      padding: 50px;
+      margin-top: 30px;
+      margin-left: 15px;
+    }
+
+    #secondary {
+      background-color: #F9BC35;
+      border-radius: 0 4rem 4rem 0;
+      text-align: center;
+    }
+
+    #main .form-control {
+      border-radius: 0;
+      font-size: .9em;
+    }
+
+    .btn {
+      text-transform: uppercase;
+      border-radius: .15rem;
+      width: 200px;
+      padding: .150rem .75rem;
+      margin: 5px auto;
+      font-family: 'PT Sans', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .btn-primary {
+      border-color: rgba( 255, 255, 255, 0);
+      background: #f1da36; /* Old browsers */
+      background: -moz-linear-gradient(left, #f1da36 0%, #fca86c 99%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(left, #f1da36 0%,#fca86c 99%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right, #f1da36 0%,#fca86c 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    }
+
+    .btn-primary:hover {
+      border-color: rgba( 255, 255, 255, 0);
+    }
+
+    #main .btn-primary {
+      width: 100%;
+    }
+    #secondary .btn-primary {
+      color: #fff;
+    }
+    .modal-body label {
+      margin-bottom: 0;
+    }
+
+    .sec-content {
+      margin-top: 85%;
+    }
+
+    #parentSecond{
+      visibility: hidden;
+      width: 100%; 
+      height: 100%;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      position:fixed;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 999999;
+    }
+
+    #rightchildSecond{
+      width: 25%;
+      height: 50%;
+      top: 0;
+      right: 0; 
+      bottom: 0;
+      margin-right: 35px;
+      position:absolute;
+      background-color: #ffeeee;
+      transform: translate(0%, 70%);
+      -ms-transform: translate(-50%,-50%);
+      border-radius: 15px;
+    }
+    </style>
+    
+    <script>
+		function parentSecond() {
+			el = document.getElementById("parentSecond");
+			el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		}
+    function calcRate(r) {
+    const f = ~~r,//Tương tự Math.floor(r)
+    id = 'star' + f + (r % f ? 'half' : '')
+    id && (document.getElementById(id).checked = !0)
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"url": "index.html",
+		"logo": "images/tlu.jpg"
+    }
+    </script>
+    <meta property="og:title" content="Trang chủ">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#478ac9">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+  </head>
+  <body data-home-page="Trang-chủ.html" data-home-page-title="Trang chủ" class="u-body">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+  <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+  {% comment %} <script src="//maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> {% endcomment %}
+  
+  {% comment %} <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> {% endcomment %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  <div id="parent" style="">
+    <div id="rightchild">
+      <button class="btn btn-success" onclick='parentSecond()'>
+      </button>
+    </div>
+  </div>
+
+  <div id="parentSecond">
+    <div id="rightchildSecond">
+      <div class="jumbotron text-center">
+        <h2 class="display-3">Phản hồi!</h2>
+        {% comment %} <p class="lead"><strong>Please check your email</strong> for further instructions on how to complete your account setup.</p> {% endcomment %}
+        <form action="#" method='POST'>
+        {% csrf_token %}
+            <div id="rating">
+              <input type = "radio" id="star5" name="rating" value="5" />
+              <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+          
+              <input type = "radio" id="star4" name="rating" value="4" />
+              <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+          
+              <input type = "radio" id="star3" name="rating" value="3" />
+              <label class = "full" for="star3" title="Meh - 3 stars"></label>
+          
+              <input type = "radio" id="star2" name="rating" value="2" />
+              <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+          
+              <input type = "radio" id="star1" name="rating" value="1" />
+              <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+            </div>
+            <div id="rating">
+            <p class="lead">
+              <div class="row">
+                <textarea type="text" name="comment" rows="5" cols="32"  placeholder="Chia sẻ cảm nhận của bạn..."></textarea>              
+              </div>
+              <div class="row">
+                <hr>
+                <input type="hidden" name="feedback" value="feedback">
+                <button type="submit" class="btn btn-info text-white" onclick='parentSecond()'>Gửi phản hồi</button>
+              </div>
+            </p>
+            </div>
+        </div>
+        </form>
+      </div>
+  </div>
+
+  <header class="u-clearfix u-header u-header" id="sec-04de"><div class="u-clearfix u-sheet u-sheet-1">
+        <a href="." class="u-image u-image-round u-logo u-image-1" data-animation-name="rubberBand" data-animation-duration="1750" data-animation-delay="0" data-animation-direction="">
+          <img src="{% static 'images/tlu.jpg' %}" class="u-logo-image u-logo-image-1" data-image-width="64">
+        </a>
+        
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+              <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</symbol>
+</defs></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item">
+            <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="." style="padding: 10px 20px;">Trang chủ</a>
+</li>
+<li class="u-nav-item">
+<a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 10px 20px;">Thành viên</a>
+<div class="u-nav-popup">
+<ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+<li class="u-nav-item">
+<a type="button" class="btn btn-info" href="/login">Đăng nhập</a>
+</li>
+<li class="u-nav-item">
+<a type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" href="#">Đăng ký</a>
+</li>
+</ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 10px 20px;">Liên hệ</a>
+<div class="u-nav-popup">
+<ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-3">
+<li class="u-nav-item">
+<a type="button" class="btn btn-info" href="tel:+84941905633">Điện thoại</a>
+{% comment %} <a class="u-button-style u-nav-link u-white" href="tel:+84941905633">Điện thoại</a> {% endcomment %}
+</li>
+<li class="u-nav-item">
+<a type="button" class="btn btn-info" href="mailto:duongdre@gmail.com?subject=Subject">Email</a>
+{% comment %} <a class="u-button-style u-nav-link u-white" href="mailto:duongdre@gmail.com?subject=Subject">Email</a> {% endcomment %}
+</li></ul>
+</div>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="." style="padding: 10px 20px;">Trang chủ</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://www.facebook.com/BMKDuongDre/" style="padding: 10px 20px;">Thành viên</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login">Đăng nhập</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/register">Đăng ký</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://www.facebook.com/BMKDuongDre/" style="padding: 10px 20px;">Liên hệ</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-6"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="tel:+84941905633">Điện thoại</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="mailto:duongdre@gmail.com?subject=Subject">Email</a>
+</li></ul>
+</div>
+</li></ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+      </div></header>
+    {% comment %} <section class="u-clearfix u-image u-shading u-section-1" id="carousel_8e65" data-image-width="1600" data-image-height="764">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-group u-group-1">
+          <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-container-layout-1">
+            <h2 class="u-text u-text-body-alt-color u-title u-text-1">Giải pháp công nghệ dịch vụ số DRE Việt Nam</h2>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+
+<!-- Button trigger modal -->
+{% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Sign Up
+</button> {% endcomment %}
+
+<!-- Modal -->
+{% comment %} <div id="overlay">
+	<div class="jumbotron text-center">
+	<h1 class="display-3">Thank You!</h1>
+	<p class="lead"><strong>Please check your email</strong> for further instructions on how to complete your account setup.</p>
+	<hr>
+	<p>
+		Having trouble? <a href="">Contact us</a>
+	</p>
+	<p class="lead">
+		<a class="btn btn-info" href="https://bootstrapcreative.com/" role="button">Trang chủ</a>
+	</p>
+	</div>
+</div> {% endcomment %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="column" id="main">
+          <h1>Đăng ký </h1>
+          <h3>Vui lòng để lại thông tin đăng ký</h3>
+          <h3>Chúng tôi sẽ hỗ trợ sau ít phút</h3>
+          <br>
+          <form action='#' method='GET'>
+            <div class="form-group">
+              <label for="exampleInputName">Tên khách hàng</label>
+              <input type="name" name="name" class="form-control" id="exampleInputName" placeholder="Tên khách hàng" required="required" pattern="[A-Za-z0-9]{1,20}">
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="exampleInputEmail1">E-mail </label>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="exampleInputPassword">Số điện thoại</label>
+              <input type="tel" name="phonenumber" class="form-control" id="exampleInputPassword" placeholder="Số điện thoại" required="required" pattern="[0-9]{9,20}">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+          </form>
+        </div>
+
+        <div>
+          <?xml version="1.0" encoding="UTF-8"?>
+          <svg width="67px" height="578px" viewBox="0 0 67 578" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title>Path</title>
+              <desc>.</desc>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path d="M11.3847656,-5.68434189e-14 C-7.44726562,36.7213542 5.14322917,126.757812 49.15625,270.109375 C70.9827986,341.199016 54.8877465,443.829224 0.87109375,578 L67,578 L67,-5.68434189e-14 L11.3847656,-5.68434189e-14 Z" id="Path" fill="#F9BC35"></path>
+              </g>
+          </svg>
+        </div>
+        <div class="column" id="secondary">
+          <div class="sec-content">
+            <h4>Đã có tài khoản!</h4>
+            <h2>Đăng nhập và sử dụng dịch vụ được cung cấp bởi ABC</h2>
+            <a type="button" class="btn btn-primary" href="/login">Đăng nhập</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <section class="u-clearfix u-section-2" id="carousel_fe61">
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-image u-layout-cell u-left-cell u-size-33 u-image-1">
+              <div class="u-container-layout">
+                <div class="u-align-left-xs u-container-style u-group u-group-1">
+                  <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs">
+                    {% comment %} <h5 class="u-text u-text-body-alt-color u-text-1">Dành cho đơn vị vận tải</h5> {% endcomment %}
+                    <h2 class="u-text u-text-body-alt-color u-text-2">Dịch vụ vận chuyển</h2>
+                    <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-1"></div>
+                    <p class="u-text u-text-body-alt-color u-text-3">Cầu nối vững chắc giữa Doanh nghiệp và Đơn vị vận tải.</p>
+                    <p class="u-text u-text-body-alt-color u-text-3">...</p>
+                    <a href="https://www.facebook.com/BMKDuongDre/" class="u-border-1 u-border-white u-btn u-button-style u-custom-font u-heading-font u-btn-1" target="_blank">Xem thêm</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="u-container-style u-expand-resize u-layout-cell u-right-cell u-size-27 u-layout-cell-2">
+              <div class="u-container-layout u-valign-middle u-container-layout-3">
+                <img src="{% static 'images/83558fe3372ee161e57403bc6d9e8f48.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-2" data-image-width="1000" data-image-height="690">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% comment %} <section class="u-clearfix u-section-2" id="carousel_fe61">
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-image u-layout-cell u-left-cell u-size-33 u-image-1">
+              <div class="u-container-layout">
+                <div class="u-align-left-xs u-container-style u-group u-group-1">
+                  <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs">
+                    <h5 class="u-text u-text-body-alt-color u-text-1">Dành cho đơn vị vận tải</h5>
+                    <h2 class="u-text u-text-body-alt-color u-text-2">Trở thành đối tác ngay hôm nay</h2>
+                    <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-1"></div>
+                    <p class="u-text u-text-body-alt-color u-text-3">Trở thành đối tác để tránh bỏ lỡ cơ hội tăng nguồn thu nhập qua từng cung đường.
+                                                                    Đăng ký ngay hôm nay.</p>
+                    <a href="https://www.facebook.com/BMKDuongDre/" class="u-border-1 u-border-white u-btn u-button-style u-custom-font u-heading-font u-btn-1" target="_blank">Xem thêm</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="u-container-style u-expand-resize u-layout-cell u-right-cell u-size-27 u-layout-cell-2">
+              <div class="u-container-layout u-valign-middle u-container-layout-3">
+                <img src="{% static 'images/83558fe3372ee161e57403bc6d9e8f48.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-2" data-image-width="1000" data-image-height="690">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+    <section class="u-clearfix u-grey-5 u-section-3" id="carousel_ec5f">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-left-cell u-size-20 u-size-20-md u-layout-cell-1">
+                <div class="u-container-layout u-valign-top u-container-layout-1">
+                  <h2 class="u-text u-text-palette-1-dark-1 u-text-1">Vận chuyển hàng hóa liên tỉnh</h2>
+                  <div class="u-border-1 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+                  <p class="u-text u-text-grey-50 u-text-2">Sẵn sàng phục vụ khách hàng. Nhận vận chuyển mọi loại hàng hóa trên mọi nẻo đường.</p>
+                  <img src="{% static 'images/d33c87c3137121df21bce4bf29c710b0.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-1">
+                  <a href="https://www.facebook.com/BMKDuongDre/" class="u-active-black u-border-none u-btn u-button-style u-hover-black u-palette-1-base u-btn-1" target="_blank">Xem thêm</a>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-20 u-size-20-md u-layout-cell-2">
+                <div class="u-container-layout u-valign-top u-container-layout-2">
+                  <h2 class="u-text u-text-palette-1-dark-1 u-text-3">Theo dõi hành trình mọi lúc mọi nơi</h2>
+                  <div class="u-border-1 u-border-palette-1-base u-line u-line-horizontal u-line-2"></div>
+                  <p class="u-text u-text-grey-50 u-text-4">Dễ dàng theo dõi tình trạng hàng hóa của bạn với thời gian thực. Mọi lúc mọi nơi, trên mọi thiết bị.</p>
+                  <img src="{% static 'images/b2ea4b0df2ce0ea638d7dfa1fd885292.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-2">
+                  <a href="https://www.facebook.com/BMKDuongDre/" class="u-active-black u-border-none u-btn u-button-style u-hover-black u-palette-1-base u-btn-2" target="_blank">Xem thêm</a>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-right-cell u-size-20 u-size-20-md u-layout-cell-3">
+                <div class="u-container-layout u-valign-middle-sm u-valign-top-lg u-valign-top-md u-valign-top-xl u-valign-top-xs u-container-layout-3">
+                  <h2 class="u-text u-text-palette-1-dark-1 u-text-5">Thông tin bên lề</h2>
+                  <div class="u-border-1 u-border-palette-1-base u-line u-line-horizontal u-line-3"></div>
+                  <p class="u-text u-text-grey-50 u-text-6">Thông tin 1.<br>
+                  <p class="u-text u-text-grey-50 u-text-6">Thông tin 2.<br>
+                  <p class="u-text u-text-grey-50 u-text-6">Thông tin 3.<br>
+                  <p class="u-text u-text-grey-50 u-text-6">Thông tin 4.<br>
+                  <p class="u-text u-text-grey-50 u-text-6">Thông tin 5.<br>
+                  <p class="u-text u-text-grey-50 u-text-6">Thông tin 6.<br>
+                  <p class="u-text u-text-grey-50 u-text-6">Thông tin 7.<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-section-4" id="carousel_67cf">
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-expand-resize u-layout-cell u-right-cell u-size-27 u-layout-cell-1">
+              <div class="u-container-layout u-container-layout-1">
+                <img src="{% static 'images/f8cf4c5d6764b9bdd75944212ec50225.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-1">
+              </div>
+            </div>
+            <div class="u-container-style u-image u-layout-cell u-left-cell u-size-33 u-image-2">
+              <div class="u-container-layout">
+                <div class="u-align-left-md u-align-left-sm u-align-left-xl u-align-left-xs u-container-style u-group u-group-1">
+                  <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs u-container-layout-3">
+                    <h5 class="u-text u-text-body-alt-color u-text-1">Dành cho khách hàng</h5>
+                    <h2 class="u-text u-text-body-alt-color u-text-2">Ưu đãi thành viên VIP</h2>
+                    <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-1"></div>
+                    <p class="u-text u-text-body-alt-color u-text-3">Trở thành thành viên VIP ngay hôm nay để nhận những ưu đãi đặc biệt như:</p>
+                    <b class="ex1" style="color:white;">•	Lợi ích 1.</b>
+                    <b class="ex1" style="color:white;">•	Lợi ích 2.</b>
+                    <b class="ex1" style="color:white;">•	Lợi ích 3.</b>
+                    <a href="https://www.facebook.com/BMKDuongDre/" class="u-border-1 u-border-white u-btn u-button-style u-custom-font u-heading-font u-btn-1" target="_blank">Xem thêm</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-grey-10 u-section-5" id="carousel_2f57">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-group u-group-1">
+          <div class="u-container-layout u-valign-middle">
+            <h2 class="u-align-center u-text u-text-palette-1-base u-text-1">Lợi ích được cam kết</h2>
+            <div class="u-border-1 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+          </div>
+        </div>
+        <div class="u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-size-60-md u-white u-layout-cell-1">
+                <div class="u-container-layout">
+                  <img class="u-expanded-width u-image u-image-1" src="{% static 'images/storage.jpg' %}">
+                  <h6 class="u-text u-text-2">Giảm chi phí phân phối và kho vận</h6>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-12 u-size-60-md u-white u-layout-cell-2">
+                <div class="u-container-layout">
+                  <img class="u-expanded-width u-image u-image-2" src="{% static 'images/costs.jpg' %}">
+                  <h6 class="u-text u-text-3">Giảm chi phí hành chính</h6>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-12 u-size-60-md u-white u-layout-cell-3">
+                <div class="u-container-layout">
+                  <img class="u-expanded-width u-image u-image-3" src="{% static 'images/service.jpg' %}">
+                  <h6 class="u-text u-text-4">Nâng cao dịch vụ khách hàng</h6>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-12 u-size-60-md u-white u-layout-cell-4">
+                <div class="u-container-layout">
+                  <img class="u-expanded-width u-image u-image-4" src="{% static 'images/supply.jpg' %}">
+                  <h6 class="u-text u-text-5">Tăng khả năng hiển thị chuỗi cung ứng&nbsp;<br>
+                  </h6>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-right-cell u-size-12 u-size-60-md u-white u-layout-cell-5">
+                <div class="u-container-layout">
+                  <img class="u-expanded-width u-image u-image-5" src="{% static 'images/business.jpg' %}">
+                  <h6 class="u-text u-text-6">Tăng khả năng mở rộng quy mô kinh doanh</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% comment %} <section class="u-clearfix u-section-6" id="carousel_96e1">
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-image u-layout-cell u-left-cell u-size-33 u-image-1">
+              <div class="u-container-layout">
+                <div class="u-align-left-xs u-container-style u-group u-group-1">
+                  <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs">
+                    <h5 class="u-text u-text-body-alt-color u-text-1">Durability</h5>
+                    <h2 class="u-text u-text-body-alt-color u-text-2">Built to Work Hard</h2>
+                    <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-1"></div>
+                    <p class="u-text u-text-body-alt-color u-text-3">Peterbilt’s Model 367 defines rugged durability and quality construction for the vocational market and is specifically designed to endure the rigors of dump, logging, construction and numerous other heavy-duty vocational
+                                        applications. The lightweight, all-aluminum cab with lap seam construction and bulkhead style doors is legendary for toughness and corrosion resistance </p>
+                    <a href="https://www.facebook.com/BMKDuongDre/" class="u-border-1 u-border-white u-btn u-button-style u-custom-font u-heading-font u-btn-1" target="_blank">Xem thêm</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="u-container-style u-expand-resize u-layout-cell u-right-cell u-size-27 u-layout-cell-2">
+              <div class="u-container-layout u-container-layout-3">
+                <img src="{% static 'images/f8cf4c5d6764b9bdd75944212ec50225.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-2">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+
+    <section class="u-clearfix u-image u-shading u-section-1" id="carousel_8e65" data-image-width="1600" data-image-height="764">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-group u-group-1">
+          <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-container-layout-1">
+            {% comment %} <h5 class="u-text u-text-body-alt-color u-text-2">Dành cho khách hàng</h5> {% endcomment %}
+            <h2 class="u-text u-text-body-alt-color u-title u-text-1">Đăng ký tư vấn miễn phí</h2>
+            {% comment %} <p class="u-large-text u-text u-text-variant u-text-2">Cầu nối vững chắc giữa Doanh nghiệp và Đơn vị vận tải.</p> {% endcomment %}
+            <img src="{% static 'images/a2c9ee74df5599c37700097d14e3d596.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-1" data-image-width="200" data-image-height="100" data-toggle="modal" data-target="#exampleModal">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="u-clearfix u-grey-10 u-section-7" id="carousel_a55e">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-group u-group-1">
+          <div class="u-container-layout u-valign-middle">
+            <h2 class="u-align-center u-text u-text-palette-1-base u-text-1">Đối tác thành viên</h2>
+            <div class="u-border-1 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+          </div>
+        </div>
+        <div class="u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-col">
+              <div class="u-size-30 u-size-60-md">
+                <div class="u-layout-row">
+                  <div class="u-container-style u-image u-layout-cell u-left-cell u-size-20 u-size-20-md u-image-1">
+                    <div class="u-container-layout"></div>
+                  </div>
+                  <div class="u-container-style u-image u-layout-cell u-size-20 u-size-20-md u-image-2">
+                    <div class="u-container-layout"></div>
+                  </div>
+                  <div class="u-container-style u-image u-layout-cell u-right-cell u-size-20 u-size-20-md u-image-3">
+                    <div class="u-container-layout"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="u-size-30 u-size-60-md">
+                <div class="u-layout-row">
+                  <div class="u-container-style u-image u-layout-cell u-left-cell u-size-20 u-size-20-md u-image-4">
+                    <div class="u-container-layout"></div>
+                  </div>
+                  <div class="u-container-style u-image u-layout-cell u-size-20 u-size-20-md u-image-5">
+                    <div class="u-container-layout"></div>
+                  </div>
+                  <div class="u-container-style u-image u-layout-cell u-right-cell u-size-20 u-size-20-md u-image-6">
+                    <div class="u-container-layout"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="u-clearfix u-section-2" id="carousel_fe61">
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-image u-layout-cell u-left-cell u-size-33 u-image-1">
+              <div class="u-container-layout">
+                <div class="u-align-left-xs u-container-style u-group u-group-1">
+                  <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs">
+                    <h5 class="u-text u-text-body-alt-color u-text-1">Dành cho đơn vị vận tải</h5>
+                    <h2 class="u-text u-text-body-alt-color u-text-2">Trở thành đối tác</h2>
+                    <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-1"></div>
+                    <p class="u-text u-text-body-alt-color u-text-3">Cơ hội tăng cường thu nhập qua từng cung đường.</p>
+                    <p class="u-text u-text-body-alt-color u-text-3">...</p>
+                    <a href="https://www.facebook.com/BMKDuongDre/" class="u-border-1 u-border-white u-btn u-button-style u-custom-font u-heading-font u-btn-1" target="_blank">Xem thêm</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="u-container-style u-expand-resize u-layout-cell u-right-cell u-size-27 u-layout-cell-2">
+              <div class="u-container-layout u-valign-middle u-container-layout-3">
+                <img src="{% static 'images/e9ede11f51f18faa779374c20f5f143f.png' %}" alt="" class="u-image u-image-contain u-image-default u-image-2" data-image-width="1000" data-image-height="690">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% comment %} <section class="u-clearfix u-white u-section-8" id="carousel_573a">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <img src="{% static 'images/e9ede11f51f18faa779374c20f5f143f.jpeg' %}" alt="" class="u-image u-image-contain u-image-default u-image-1" data-image-width="600" data-image-height="486">
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-valign-middle-sm u-valign-middle-xs u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-2">
+                  <h2 class="u-text u-text-palette-1-dark-1 u-text-1">Công ty cổ phần ABC</h2>
+                  <div class="u-border-1 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+                  <p class="u-text u-text-grey-50 u-text-2">Được lên ý tưởng, thành lập và hoạt động từ năm 2021, chúng tôi... .&nbsp;<br>
+                    <br>
+                      <b>...</b>
+                    <br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+    <section class="u-clearfix u-image u-section-9" id="carousel_e87b">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-expanded-width-md u-expanded-width-sm u-group u-group-1">
+          <div class="u-container-layout">
+            <h2 class="u-align-center u-text u-text-palette-1-base u-text-1">Công ty cổ phần ABC</h2>
+            <div class="u-border-1 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+            {% comment %} <p class="u-align-center u-text u-text-2">Công ty cổ phẩn ABC là doanh nghiệp... với sứ mệnh... .<br> {% endcomment %}
+            <p class="u-text u-text-grey-50 u-text-2">Được lên ý tưởng, thành lập và hoạt động từ năm 2021, chúng tôi mang trong mình sứ mệnh... .&nbsp;<br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-3e2a">
+      {% comment %} <div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+      </div> {% endcomment %}
+    </footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://www.facebook.com/BMKDuongDre/" target="_blank">
+        <span>Công ty cổ phần ABC</span>
+      </a>
+      <p class="u-text">
+        <span>tối ưu hóa công nghiệp vận tải</span>
+      </p>.
+      {% comment %} <a class="u-link" href="https://www.facebook.com/BMKDuongDre/" target="_blank">
+        <span>Website Builder Software</span>
+      </a>.  {% endcomment %}
+    </section>
+  </body>
+</html>
